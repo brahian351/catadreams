@@ -1,32 +1,7 @@
+import { categories } from "@/data/products";
 import Image from "next/image";
 import Link from "next/link";
-const categories = [
-  {
-    name: "Ropa",
-    description: "Diseños y prendas personalizadas",
-    image: "/images/categories/ropa.webp",
-  },
-  {
-    name: "Cadenas",
-    description: "Accesorios personalizados",
-    image: "/images/categories/cadenas.webp",
-  },
-  {
-    name: "Chalecos",
-    description: "Estilo y protección",
-    image: "/images/categories/chalecos.webp",
-  },
-  {
-    name: "Coches",
-    description: "Vehículos y personalización",
-    image: "/images/categories/coches.webp",
-  },
-  {
-    name: "Tatuajes",
-    description: "Diseños únicos para tu personaje",
-    image: "/images/categories/tatuajes.webp",
-  },
-];
+
 
 export default function Home() {
   return (
@@ -114,39 +89,39 @@ export default function Home() {
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {categories.map((category) => (
-              <Link
-                key={category.name}
-                href="#"
-                className="group relative min-h-70 overflow-hidden rounded-2xl border border-white/10 bg-[#6d0c33]/5 "
-              >
-                {/* Image */}
-                <div className="absolute inset-0 bg-zinc-800 transition duration-500 group-hover:scale-105 text-shadow-2xs text-shadow-[#6d0c33]">
-                  <Image
-                  width={500}
-                    height={500}
-                    src={category.image}
-                    alt={category.name}
-                    className="h-full w-full object-center object-cover transition duration-500 group-hover:scale-105"
-                  />
+            {categories.map((c) => (
+              <Link key={c.slug} href={`/categoria/${c.slug}`} className="group relative min-h-70 overflow-hidden rounded-2xl border border-white/10 bg-[#6d0c33]/5 ">
+
+                <div key={c.label}>
+                  {/* Imagen */}
+                  <div className="absolute inset-0 bg-zinc-800 transition duration-500 group-hover:scale-105 text-shadow-2xs text-shadow-[#6d0c33]">
+                    <Image
+                      width={500}
+                      height={500}
+                      src={c.image}
+                      alt={c.label}
+                      className="h-full w-full object-center object-cover transition duration-500 group-hover:scale-105"
+                    />
+                  </div>
                   {/* Degradado */}
                   <div className="absolute inset-0 bg-linear-to-t from-black via-black/30 to-transparent ">
                     <div className="absolute inset-x-0 bottom-0 p-6">
                       <h3 className="text-xl font-semibold text-shadow-2xs text-shadow-[#6d0c33]">
-                        {category.name}
+                        {c.label}
                       </h3>
                       <p className="mt-1 text-sm text-white/50">
-                        {category.description}
+                        {c.description}
                       </p>
                     </div>
                   </div>
                 </div>
               </Link>
             ))}
+
           </div>
         </div>
       </section>
-        <footer className="border-t border-white/10 py-10">
+      <footer className="border-t border-white/10 py-10">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 text-sm text-white/40 sm:flex-row sm:items-center sm:justify-between lg:px-8">
           <span>CataDreams</span>
 
