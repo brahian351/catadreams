@@ -1,133 +1,112 @@
-import { categories } from "@/data/products";
-import Image from "next/image";
+import ProductCards from "@/components/ProductCard";
+import { categories, CategorySlug, products } from "@/data/products";
+import { ArrowRight, Car, Gem, Headphones, Heart,  PenTool, Settings, ShieldCheck, Shirt, ShoppingBag, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 
+const categoryIcons : Record<CategorySlug, LucideIcon> = {
+  ropa: Shirt,
+  accesorios: ShoppingBag,
+  vehiculos: Car,
+  tatuajes: PenTool,
+  personalizaciones: Settings,
+};
 
-export default function Home() {
+const features  = [
+  {icon: Gem, title: "Productos 100% exclusivos", text: "Solo en Cata Dreams"},
+  {icon: ShieldCheck, title: "Pagos seguros", text: "Tu información protegida"},
+  {icon: Headphones, title: "Atención personalizada", text: "Estamos para ayudarte"},
+  {icon: Heart, titile: "Disñeos único", text: "Tu estilo, sin limites"},
+]
+
+export default function Home(){
+  const featured = products.filter((p) => p.featured).slice(0,5);
+
   return (
-    <main className="min-h-screen bg-zinc-950 text-white">
-      {/* NAVBAR */}
-      <header className="fixed left-0 top-0 w-full border-b border-white/10 bg-white backdrop-blur-xl z-50">
-        <div className="mx-auto flex h-20 max-w7xl items-center justify-between px-6 lg:px-8">
-          <Link href="/" className="text-xl font-bold tracking-widest uppercase text-[#6d0c33]">
-            Cata Dreams &#129419;
-          </Link>
-          <nav className="hidden items-center gap-8 md:flex">
-            <Link
-              href="/"
-              className="text-sm text-[#6d0c33] transition hover:text-black/60"
-            >
-              Inicio
-            </Link>
-
-            <Link
-              href="#categorias"
-              className="text-sm text-[#6d0c33]/70 transition hover:text-black"
-            >
-              Categorías
-            </Link>
-          </nav>
-          <Link
-            href="#categorias"
-            className="rounded-full border text-[#6d0c33] border-white/20 px-5 py-2.5 text-sm font-medium transition hover:bg-white hover:text-black"
-          >
-            Explorar
-          </Link>
-        </div>
-      </header>
-
-      {/* hero section */}
-      <section className="relative felx min-h-screen items-center overflow-hidden">
-        {/* efectos fondo */}
-        <div className="absolute left-1/2 top-1/2 h-150 w-150 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6d0c33]/20 blur-3xl" />
-        <div className="relative mx-auto w-full max-w-7xl px-6 pt-20 lg:px-8">
-          <div className="max-w-4xl">
-            <p className="mb-6 text-sm font-medium leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
-              Personalización • Estilo • Exclusividad
+    <main>
+      {/* HERO */}
+      <section 
+        className="relative border-b border-line" 
+        style={{ 
+          backgroundImage: "linear-gradient(90deg, #050204 0%, rgba(5,2,4,.85) 35%, rgba(5,2,4,.1) 100%), url('/images/hero.webp'), radial-gradient(circle at 75% 40%, #7a0b3a, #050204 70%)",
+          backgroundSize: "cover",
+          backgroundPosition: "center right",
+          }}
+        >
+          <div className="mx-auto max-w-7xl px-4 py-16 sm:py-24">
+            <p className="text-sm uppercase tracking-[0.5em] text-rose">Cata Dreams</p>
+            <h1 className="mt-4 font-display text-5xl leading-tight sm:text-7xl">Tu estilo,</h1>
+            <p className="bg-gradient-to-r from-rose to-wine bg-clip-text font-brush text-6xl italic text-transparent sm:text-8xl">
+              ropa · Accesorios · Vehículos · Tatuajes · Personalizaciones
             </p>
-            <h1 className="text-5xl font-bold leading-[0.95] tracking-tight uppercase sm:text-7xl lg:text-8xl">
-              Tu Estilo
-              <br />
-              <span className="uppercase text-white/40">Tu Identidad</span>
-            </h1>
-            <p className="mt-8 max-w-xl text-base leading-7 text-white/60 sm:text-lg">
-              {/* Descubre una nueva forma de expresar tu estilo único con nuestros diseños exclusivos. */}
-              Descubre productos personalizados diseñados para representar tu
-              estilo. Ropa, accesorios, vehículos, tatuajes y mucho más.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                href="#categorias"
-                className="rounded-full bg-[#6d0c33] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#6d0c33]/80"
-              >
-                Ver Colección
-              </Link>
-              <Link
-                href="#"
-                className="rounded-full border border-white/20 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-white/10"
-              >
-                Contáctanos
-              </Link>
-            </div>
+            <Link href="#categoras" className="mt-8 inline-flex items-center gap-3 rounded-full border border-rose bg-wine px-8 py-3 text-sm uppercase tracking-widest transition hover:bg-rose ">
+              Explorar colección <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
-        </div>
       </section>
-      {/* Categorias */}
-      <section id="categorias" className="border-t border-white/10 py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mb-12 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-            <div>
-              <p className="mb-3 text-xs font-medium tracking-[0.3em] text-white/40 uppercase">
-                Explora
-              </p>
-              <h2 className="text-3xl font-semibold tracking-tight sm:text-5xl">
-                Categorías
-              </h2>
-            </div>
-            <p className="max-w-md text-sm leading-6 text-white/50">
-              Descubre nuestra amplia selección de categorías diseñadas para satisfacer tus necesidades y preferencias.
-            </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {categories.map((c) => (
-              <Link key={c.slug} href={`/categoria/${c.slug}`} className="group relative min-h-70 overflow-hidden rounded-2xl border border-white/10 bg-[#6d0c33]/5 ">
-
-                <div key={c.label}>
-                  {/* Imagen */}
-                  <div className="absolute inset-0 bg-zinc-800 transition duration-500 group-hover:scale-105 text-shadow-2xs text-shadow-[#6d0c33]">
-                    <Image
-                      width={500}
-                      height={500}
-                      src={c.image}
-                      alt={c.label}
-                      className="h-full w-full object-center object-cover transition duration-500 group-hover:scale-105"
-                    />
+      {/* CATEGORIAS */}
+      <section id="categorias" className="mx-auto max-w-7xl scroll-mt-24 px-4 py-8">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {categories.map((c) => {
+            const Icon = categoryIcons[c.slug];
+            return (
+              <Link 
+                key={c.slug}
+                href={`/categoria/${c.slug}`}
+                className="group relative flex h-52 flex-col justify-end overflow-hidden rounded-xl border border-line"
+                style={{
+                  backgroundImage: `linear-gradient(to top, #050204 5%, rgba(5,2,4,.2) 60%), url('${c.image}'), linear-gradient(160deg, #3a0a1f, #050204)`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              >
+                <div className="flex items-center gap-3 p-4">
+                  <Icon className="h-7 w-7 shrink-0 text-rose" />
+                  <div className="flex-1">
+                      <p className="text-sm font-semibold uppercase tracking-wide">{c.label}</p>
+                      <p className="text-sm to-zinc-400">{c.tagline}</p>
                   </div>
-                  {/* Degradado */}
-                  <div className="absolute inset-0 bg-linear-to-t from-black via-black/30 to-transparent ">
-                    <div className="absolute inset-x-0 bottom-0 p-6">
-                      <h3 className="text-xl font-semibold text-shadow-2xs text-shadow-[#6d0c33]">
-                        {c.label}
-                      </h3>
-                      <p className="mt-1 text-sm text-white/50">
-                        {c.description}
-                      </p>
-                    </div>
-                  </div>
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-500 transition group-hover:border-rose group-hover:bg-rose">
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
                 </div>
               </Link>
-            ))}
-
-          </div>
+            );
+          })}
         </div>
       </section>
-      <footer className="border-t border-white/10 py-10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 text-sm text-white/40 sm:flex-row sm:items-center sm:justify-between lg:px-8">
-          <span>CataDreams</span>
-
-          <span>© 2026 Todos los derechos reservados.</span>
+      {/* BENEFICIOS */}
+      <section id="nosotros" className="mx-auto max-w-7xl scroll-mt-24 border-b border-line px-4 py-8">
+        <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
+          {features.map(({ icon: Icon, title, text }) => (
+            <div key={title} className="flex items-center gap-4">
+              <Icon className="h-9  w-9 shrink-0 text-rose" />
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-wide">{title}</p>
+                <p className="text-xs text-zinc-400">{text}</p>
+              </div>
+            </div>
+          ))}
         </div>
-      </footer>
+      </section>
+
+      {/* BEST SELLERS */}
+      <section className="mx-auto max-w-7xl px-4 py-12">
+          <div className="mb-6 flex items-end justify-baseline">
+            <div>
+              <p className="text-sm uppercase tracking-[0.3em] text-rose">&#129419; Los más amados</p>
+              <h2 className="font-brush text-5xl italic">Best <span className="text-rose">Sellers</span></h2>
+            </div>
+            <Link className="flex items-center gap-2 text-sm hover:text-rose" href="#categorias">
+              Ver todos los productos <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+            {featured.map((p) => (
+              <ProductCards key={p.id} product={p} />
+            ))}
+          </div>
+      </section>
     </main>
-  );
+  )
 }

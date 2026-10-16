@@ -20,7 +20,7 @@ export default async function CategoryPage({ params } : { params: Promise <{ slu
                 ← Volver a categorías
             </Link>
             <h1 className="mt-4 text-3xl font-bold">{category.label}</h1>
-            <p className="mb-8 mt-1 to-zinc-400">{category.description}</p>
+            <p className="mb-8 mt-1 to-zinc-400">{category.tagline}</p>
             <ProductList items={items} />
         </main>
     )
