@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cinzel, Kaushan_Script, Montserrat } from "next/font/google";
 import Header from "@/components/Header";
 import "./globals.css";
+import ButterflyRain from "@/components/ButterflyRain";
 
 
 const cinzel = Cinzel({subsets: ["latin"], variable: "--font-cinzel"});
@@ -17,6 +18,7 @@ export default function RootLayout({children} : {children : React.ReactNode}){
   return (
     <html lang="es">
         <body className={`${cinzel.variable} ${kaushan.variable} ${montserrat.variable} bg-bg font-body antialiased`}>
+            <ButterflyRain />
             <Header />
             {children}
             <footer className="border-t border-line py-8 text-center text-sm text-zinc-500">

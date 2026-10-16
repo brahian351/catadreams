@@ -18,3 +18,46 @@ body {
   background: var(--color-bg);
   color: #fff;
 }
+
+
+/* =========== LLUVIA DE MARIPOSAS =========== */
+
+.butterfly {
+  position: absolute;
+  top: 0;
+  left: var(--x);
+  width: var(--size);
+  animation: bf-fall var(--dur) linear var(--delay) infinite;
+  will-change: transform;
+}
+
+.butterfly-sway{
+  animation: bf-sway var(--sway-dur) ease-in-out var(--delay) infinite alternate;
+}
+
+.butterfly-sway svg{
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: bg-flap var(--flap) ease-in-out infinite alternate;  
+}
+
+@keyframes bf-fall {
+  from {transform: translate3d(0, -12vh, 0);}
+  to {transform: translate3d(0, 115vh, 0);}
+}
+
+@keyframes bg-sway {
+  from {transform: translateX(calc(var(--sway) * -1)) rotate(-18deg);}
+  to {transform: translateX(var(--sway)) rotate(18deg);}
+}
+
+@keyframes bg-flap {
+  from {transform: scaleX(1);}
+  to {transform: scaleX(0.45);}
+}
+
+/* Respeta quien no usa animaciones en su computadora */
+@media (prefers-reduced-motion: reduce){
+  .butterfly-rain {display: none;}
+}
