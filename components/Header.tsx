@@ -1,5 +1,6 @@
 import { categories } from "@/data/products";
 import { ChevronDown, Heart, Search, ShoppingCart, User } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 
@@ -18,9 +19,9 @@ export default function Header() {
             <header className="sticky top-0 z-40 border-b border-line bg-black/90 backdrop-blur">
                 <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3">
                     {/* Logo */}
-
                     <Link href="/" className="flex items-center gap-3">
-                        <span className="text-4xl">&#129419;</span>
+                        {/* <span className="text-4xl">&#129419;</span> */}
+                        <Image src="/images/logo.png" height={80} width={80} alt="logo" />
                         <span className="leading-none">
                             <span className="block font-display text-3xl tracking-widest">CATA</span>
                             <span className="blox text-[9px] tracking-[0.6em] text-zinc-400">DREAMS</span>
@@ -47,7 +48,7 @@ export default function Header() {
                     <div className="flex items-center gap-4">
                         <div className="hidden items-center rounded-full border border-zinc-700 px-4 py-2 lg:flex">
                             <input placeholder="Buscar productos..." className="w-40 bg-transparent text-sm placeholder:to-zinc-500 focus:outline-none" />
-                            <Search className="h-4 w-4 to-zinc-300" />                                
+                            <Search className="h-4 w-4 to-zinc-300" />
                         </div>
                         <User className="h-6 w-6 cursor-pointer hover:text-rose" />
                         <Heart className="h-6 w-6 cursor-pointer hover:text-rose" />
