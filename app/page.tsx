@@ -1,7 +1,8 @@
 import ProductCards from "@/components/ProductCard";
-import { categories, CategorySlug, products } from "@/data/products";
 import { ArrowRight, Car, Gem, Headphones, Heart,  PenTool, Settings, ShieldCheck, Shirt, ShoppingBag, type LucideIcon } from "lucide-react";
 import Link from "next/link";
+import { categories, type CategorySlug } from "@/data/products";
+import { getProducts } from "@/lib/product";
 
 const categoryIcons : Record<CategorySlug, LucideIcon> = {
   ropa: Shirt,
@@ -18,7 +19,10 @@ const features  = [
   {icon: Heart, titile: "Disñeos único", text: "Tu estilo, sin limites"},
 ]
 
-export default function Home(){
+export const revalidate = 60; // la web se refresca sola cada 60 s
+
+export default async function Home(){
+  const products = await getProducts();
   const featured = products.filter((p) => p.featured).slice(0,5);
 
   return (
